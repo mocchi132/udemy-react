@@ -11,8 +11,9 @@ class App extends Component {
 //  return <input type="text" onClick={() => {console.log("I am clicked")}} />;
 
 // パターン３ 関数が入った変数を、パラメータに設定
+// return内は、必ず一つのタグでなければならない。
   return (
-      <div>
+      <React.Fragment>
         <div>
           <label htmlFor="for">bar1</label>
           <input type="text" onChange={consFunc} />
@@ -21,7 +22,7 @@ class App extends Component {
           <label htmlFor="for2">bar2</label>
           <input type="text" onChange={consFunc2} />
         </div>
-      </div>
+      </React.Fragment>
   );
   }
 }
