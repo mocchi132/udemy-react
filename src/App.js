@@ -1,36 +1,39 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, {Component} from 'react';
 
-const App = () => {
+const App = () => (<Counter></Counter>)
 
-  const profiles = [
-    { name: "Mocchi", age:"10"},
-    { name: "Hachi", age:"21"},
-    { name: "Ha" }
-  ]
-  return (
-      <div>
-        {
-          profiles.map((profile, index) => {
-            return (
-                <User name={profile.name} age={profile.age} key={index} />
-            );
-          })
-        }
-      </div>
-  )
-}
+class Counter extends Component {
+  // stateとは、javaでいうインスタンス変数のこと
+  
+  constructor(props){
+    super(props)
+    console.log(this.state)
+    this.state = {count:0}
+  }
 
-const User = (props) => {
-  return (
-      <div>Hi, I am {props.name} and {props.age} years old</div>
-  );
-}
+  handlePlusButton = () => {
+    const currentCount = this.state.count
+    this.setState({count: currentCount + 1})
+  }
+  handleMinusButton = () => {
+    const currentCount = this.state.count
+    this.setState({count: currentCount - 1})
+  }
 
-// props内の型定義 誤った型を渡すとブラウザでWarningが出るようになる
-User.propTypes = {
-  name: PropTypes.string,
-  age: PropTypes.string.isRequired
+  // 初期化のthis.state = {const:0}を使うと、renderが行われず、再描画されない
+  // this.setStateを実行すると、最後にrenderメソッドを実行し、再描画してくれる。
+  // そのため、必ず、setStateをすること
+
+  render(){
+    console.log(this.state)
+    return (
+      <React.Fragment>
+        <div>count: {this.state.count}</div>
+        <button onClick={this.handlePlusButton}>+1</button>
+        <button onClick={this.handleMinusButton}>-1</button>
+      </React.Fragment>
+    )
+  }
 }
 
 export default App;
