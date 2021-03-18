@@ -1,36 +1,40 @@
 import React from 'react';
 
-// クラスコンポーネント
-// class App extends Component {
-//  render() {
-//   return (
-//       <React.Fragment>
-//         <div>
-//           <label htmlFor="for">bar1</label>
-//           <input type="text" onChange={consFunc} />
-//         </div>
-//         <div>
-//           <label htmlFor="for2">bar2</label>
-//           <input type="text" onChange={consFunc2} />
-//         </div>
-//       </React.Fragment>
-//   );
-//   }
-// }
-
-// functional コンポーネント
 const App = () => {
+  const profiles = [
+    { name: "Mocchi", age:"10"},
+    { name: "Hachi", age:"21"},
+    { name: "Hachi"}
+  ]
   return (
       <div>
-        <Cat />
-        <Cat />
-        <Cat />
-        <Cat />
+        {
+          // 繰り返し表現 []の変数.map
+          profiles.map((profile, index) =>{
+            return (
+              <React.Fragment>
+                <User name={profile.name} age={profile.age} key={index} />
+                <br/>
+              </React.Fragment>
+            );
+          })
+        }
       </div>
-  )
+  );
 }
 
-const Cat = () => {
-  return <div>Meow!</div>
+const User = (props) => {
+  return (
+    <React.Fragment>
+      <div>Hi, I am {props.name}</div>
+      <div>and {props.age} years old</div>
+    </React.Fragment>
+  );
 }
+
+// propsの属性にデフォルト値を設定する方法
+User.defaultProps = {
+  age: 1
+}
+
 export default App;
