@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const App = () => {
 
   const profiles = [
     { name: "Mocchi", age:"10"},
     { name: "Hachi", age:"21"},
-    { name: "Hachi"}
+    { name: "Ha" }
   ]
   return (
       <div>
@@ -22,15 +23,14 @@ const App = () => {
 
 const User = (props) => {
   return (
-    <React.Fragment>
       <div>Hi, I am {props.name} and {props.age} years old</div>
-    </React.Fragment>
   );
 }
 
-// propsの属性にデフォルト値を設定する方法
-User.defaultProps = {
-  age: 1
+// props内の型定義 誤った型を渡すとブラウザでWarningが出るようになる
+User.propTypes = {
+  name: PropTypes.string,
+  age: PropTypes.string.isRequired
 }
 
 export default App;
