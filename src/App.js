@@ -4,7 +4,7 @@ const App = () => (<Counter></Counter>)
 
 class Counter extends Component {
   // stateとは、javaでいうインスタンス変数のこと
-  
+
   constructor(props){
     super(props)
     console.log(this.state)
