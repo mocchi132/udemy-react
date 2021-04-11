@@ -22,9 +22,12 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <Switch>
-        // :(コロン)で、変数を受け取ることを表す
-        <Route path="/events/:id" component={EventsShow} />
         <Route path="/events/new" component={EventsNew} />
+        // :(コロン)で、「/*」と同じ感じになる。
+        // :(コロン)は最後！！
+        // ⇨パスのマッピングは、上から順番に解決されるっぽいので、:(コロン)を先頭にすると、
+        // 　全部:(コロン)の方にいっちゃうから。
+        <Route path="/events/:id" component={EventsShow} />
         <Route exact path="/" component={EventsIndex} />
         <Route exact path="/events" component={EventsIndex} />
         // exact パスの一致を厳格にする設定
