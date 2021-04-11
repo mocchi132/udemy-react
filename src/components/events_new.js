@@ -31,13 +31,15 @@ class EventsNew extends Component {
   }
 
   render(){
-    const { handleSubmit } = this.props
+    // pritimne：inputになにもなければ、trueになるboolean
+    // submitting：submit押下後、trueになるboolean
+    const { handleSubmit, pristine,submitting } = this.props
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <div><Field label="Title" name="title" type="text" component={this.renderField} /></div>
         <div><Field label="Body" name="body" type="text" component={this.renderField} /></div>
         <div>
-          <input type="submit" value="Submit" disabled={false} />
+          <input type="submit" value="Submit" disabled={pristine || submitting} />
           <Link to="/" >Cancel</Link>
         </div>
       </form>
@@ -57,6 +59,7 @@ const validate = values => {
 const mapDispatchToProps = ({ postEvent })
 
 // connectメソッドに渡すと、this.propsに外部のメソッドをbindしてくれるっぽい
+// postEventが、このコンポーネントに関連付くactionである、と指定する処理
 export default connect(null, mapDispatchToProps)(
   // reduxForm()(ここ)　「ここ」は、reduxFrom()関数が返却する関数の引数になる
   reduxForm({validate, form: 'eventNewForm'})(EventsNew)
