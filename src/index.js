@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { composeWithDevTools} from 'redux-devtools-extension'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 import './index.css'
 import reducer from './reducers';
@@ -19,6 +20,7 @@ const enhancer = process.env.NODE_ENV === 'development' ?
 const store = createStore(reducer, enhancer)
 
 ReactDOM.render(
+  <MuiThemeProvider>
   <Provider store={store}>
     <BrowserRouter>
       <Switch>
@@ -33,7 +35,8 @@ ReactDOM.render(
         // exact パスの一致を厳格にする設定
       </Switch>
     </BrowserRouter>
-  </Provider>,
+  </Provider>
+  </MuiThemeProvider>,
   document.getElementById('root')
 );
 
